@@ -9,12 +9,36 @@
           </button>
           <a class="navbar-brand" href="#">Project name</a>
         </div>
-          
+
         <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+
+        {% if (app.request.getLocale()) == 'fr' %}
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'navbar.language'|trans }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header"><strong>{{ 'navbar.choose'|trans }}</strong></li>
+        <li class="active"><a href="#"> Fr</a></li>
+        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"> En</a></li>
+        </ul>
+        </li>
+        {% endif %}
+        {% if (app.request.getLocale()) == 'en' %}
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'navbar.language'|trans }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header"><strong>{{ 'navbar.choose'|trans }}</strong></li>
+        <li class=""><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}"> Fr</a></li>
+        <li class="active"><a href=""> En</a></li>
+        </ul>
+        </li>
+        {% endif %}
+
+        </ul>
          <ul class="nav navbar-nav navbar-right">
-           <li class="active"><a href="{{ path("re_main") }}"/>Home</a>
-           <li class=""><a href="#"/>Services</a>
-           <li class=""><a href="#"/>Contact</a>
+           <li class="active"><a href="{{ path("re_main") }}"/>{{ 'navbar.home'|trans }}</a>
+           <li class=""><a href="#"/>{{ 'navbar.services'|trans }}</a>
+           <li class=""><a href="#"/>{{ 'navbar.contact'|trans }}</a>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>

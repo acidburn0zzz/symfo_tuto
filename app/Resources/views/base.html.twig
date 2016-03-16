@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-  	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width">
-        <title>{% block title %} Base {% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>{% block title %} {{ 'base.title'|trans }} {% endblock %}</title>
         {% block stylesheets %}
-	{% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css' 
-	'@MainBundle/Resources/public/css/font-awesome.min.css' 
-	'@MainBundle/Resources/public/css/main.css' filter='cssrewrite' %}
-    	<link rel="stylesheet" href="{{ asset_url }}" />
-	{% endstylesheets %}	
-	{% endblock %}
+        {% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css'
+        '@MainBundle/Resources/public/css/font-awesome.min.css'
+        '@MainBundle/Resources/public/css/main.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}Base{% endblock %}
-	{% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
-	'@MainBundle/Resources/public/js/bootstrap.min.js'
-	'@MainBundle/Resources/public/js/main.js' %}
+        {% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
+        '@MainBundle/Resources/public/js/bootstrap.min.js'
+        '@MainBundle/Resources/public/js/main.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     </body>

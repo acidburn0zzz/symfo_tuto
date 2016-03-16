@@ -1,0 +1,47 @@
+base:
+    title: Bienvenue sur le site sf_tuto
+    
+navbar:
+     home: Accueil
+     services: Services
+     contact: Contact
+     
+head:
+    title: Bienvenue sur sf_tuto
+    msg: Tutoriels videos
+    button: Voir
+    
+breadcrumb:
+     home: Accueil
+     services: Services
+     contact: Contact
+     
+panel:
+    1:
+      title: titre1
+      list: sousmenu1
+      details: details
+    2:
+      title: titre2
+      list: sousmenu2
+      details: details
+    3:
+      title: titre3
+      list: sousmenu3
+      details: details
+      
+footer:
+    title1: footer1
+    title2: footer2
+    title3: footer3
+    title4: footer4
+    title5: footer5
+    d1: details1
+    d2: details2
+    d3: details3
+    d4: details4
+    d5: details5
+    d6: details6
+    d7: details7
+    d8: details8
+    copyright: copyright
