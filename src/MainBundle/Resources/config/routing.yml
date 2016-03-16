@@ -1,0 +1,3 @@
+re_main:
+    path:     /site
+    defaults: { _controller: MainBundle:Default:index }
