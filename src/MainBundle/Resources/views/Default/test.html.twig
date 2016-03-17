@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="text-center">
+Formulaire test <br />
+
+{{ form(form) }}
+
+<br />
+{% if (name is not null) or (email is not null) or (objet is not null) %}
+valeur formulaire  : <br />
+name : <b>{{ name }}</b><br />
+email : <b>{{ email }}</b><br />
+objet : <b>{{ objet }}</b> <br />
+{% endif %}
+</div>
+{% endblock %}
