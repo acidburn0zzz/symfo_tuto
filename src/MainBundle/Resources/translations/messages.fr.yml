@@ -5,6 +5,8 @@ navbar:
      home: Accueil
      services: Services
      contact: Contact
+     language: Langue
+     choose: Choix langue
      
 head:
     title: Bienvenue sur sf_tuto
