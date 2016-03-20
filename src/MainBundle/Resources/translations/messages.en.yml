@@ -17,7 +17,31 @@ breadcrumb:
      home: Home
      services: Services
      contact: Contact
-     
+
+contact:
+    title: Welcome to our contact page
+    msg: send us an email
+    button: Check
+    head: Contact form
+    p:
+       firstname: Firstname
+       lastname: Lastname
+       email: Enter a valide email
+       message: Your message
+    form:
+       firstname: Firstname
+       lastname: Lastname
+       email: Email
+       object: Object
+       message: Message
+       reset: Reset
+       send: Send
+    success:
+       head: The message has been sent
+       msg: thanks! 
+       timer: Autoclosing in 
+       unity: secondes
+
 panel:
     1:
       title: title1

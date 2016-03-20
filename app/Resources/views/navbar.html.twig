@@ -36,9 +36,17 @@
 
         </ul>
          <ul class="nav navbar-nav navbar-right">
-           <li class="active"><a href="{{ path("re_main") }}"/>{{ 'navbar.home'|trans }}</a>
-           <li class=""><a href="#"/>{{ 'navbar.services'|trans }}</a>
-           <li class=""><a href="#"/>{{ 'navbar.contact'|trans }}</a>
+
+	{% if app.request.attributes.get('_route') == 're_main' %}
+           <li class="active"><a href="{{ path("re_main") }}">{{ 'navbar.home'|trans }}</a>
+	   <li class=""><a href="#">{{ 'navbar.services'|trans }}</a>
+           <li class=""><a href="{{ path("re_contact") }}">{{ 'navbar.contact'|trans }}</a>
+	{% endif %}
+	{% if app.request.attributes.get('_route') == 're_contact' %}
+	   <li class=""><a href="{{ path("re_main") }}">{{ 'navbar.home'|trans }}</a>
+	   <li class=""><a href="#">{{ 'navbar.services'|trans }}</a>
+           <li class="active"><a href="{{ path("re_contact") }}">{{ 'navbar.contact'|trans }}</a>
+        {% endif %}
           </ul>
         </div><!--/.navbar-collapse -->
       </div>

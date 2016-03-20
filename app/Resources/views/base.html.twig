@@ -16,10 +16,13 @@
     </head>
     <body>
         {% block body %}Base{% endblock %}
-        {% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
+
+       {% block javascript %}
+	{% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
         '@MainBundle/Resources/public/js/bootstrap.min.js'
         '@MainBundle/Resources/public/js/main.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+       {% endblock %}
     </body>
 </html>

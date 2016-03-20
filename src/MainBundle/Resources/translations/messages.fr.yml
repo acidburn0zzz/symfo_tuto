@@ -17,7 +17,31 @@ breadcrumb:
      home: Accueil
      services: Services
      contact: Contact
-     
+
+contact:
+    title: Bienvenue sur notre page de contact
+    msg: envoyez nous un email
+    button: Voir
+    head: Formulaire de contact
+    p:
+       firstname: Prenom
+       lastname: Nom
+       email: Entrez un email valide
+       message: Votre message
+    form:
+       firstname: Prenom
+       lastname: Nom
+       email: Email
+       object: Objet
+       message: Message
+       reset: Effacer
+       send: Envoyer
+    success:
+       head: Le message a été envoyé
+       msg: merci!
+       timer: Fermeture automatique dans 
+       unity: secondes
+      
 panel:
     1:
       title: titre1

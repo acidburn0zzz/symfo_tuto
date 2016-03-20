@@ -4,6 +4,12 @@ re_main:
     requirements:
         _locale: en|fr
 
+re_contact:
+    path:     /{_locale}/contact
+    defaults: { _controller: MainBundle:Default:contact }
+    requirements:
+        _locale: en|fr
+
 re_test:
     path:     /test
     defaults: { _controller: MainBundle:Default:test }

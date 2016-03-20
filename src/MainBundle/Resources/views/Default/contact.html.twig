@@ -1,0 +1,143 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css'
+'@MainBundle/Resources/public/css/font-awesome.min.css'
+'@MainBundle/Resources/public/css/main.css'
+'@MainBundle/Resources/public/css/form.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+
+{% block body %}
+{% include '::navbar.html.twig' %}
+ <div class="jumbotron">
+      <div class="container">
+        <h1>{{ 'contact.title'|trans }}</h1>
+        <p>{{ 'contact.msg'|trans }}</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">{{ 'contact.button'|trans }}&raquo;</a></p>
+      </div>
+      </div>
+
+
+<div class="text-center mt25">
+  <ol class="breadcrumb cl">
+  <li class="active"><a href="#">{{ 'breadcrumb.home'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.services'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.contact'|trans }}</a></li>
+  </ol>
+</div>
+
+{% for flash_message in app.session.flashbag.get('notice') %}
+<div class="container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="rows mt10 text-center">
+<div class="h alert alert-success alert-dismissible">
+<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
+<h3>{{ 'contact.success.timer'|trans }} <b id="timer"></b> {{ 'contact.success.unity'|trans }}</h3>
+<h4><i class="fa fa-envelope"></i> {{ 'contact.success.head'|trans }} </h4>
+<p>{{ 'contact.success.msg'|trans }} </p>
+</div>
+</div>
+</div>
+{% endfor %}
+
+<div class="container rows"><!-- container -->
+
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        </div>
+
+
+        <div class="col-lg-6 col-md-5 col-sm-6 col-xs-12">
+        <h1> {{'contact.head'|trans }}  </h1><br />
+
+        <form action="{{ path("re_contact") }}" method="post" class="mtform">
+        {{ form_widget(form._token) }}
+
+
+        <div class="form-group">
+        <label for="validate-text">{{'contact.form.firstname'|trans }}</label>
+        <div class="input-group">
+        {{ form_widget(form.firstname, {'attr':{'class': 'form-control', 'name': 'validate-text', 'id': 'validate-text', 'placeholder': 'contact.p.firstname'|trans }} ) }}
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+        </div>
+        <b class="text-danger help-block">{{ form_errors(form.firstname) }}</b>
+        </div>
+
+        <div class="form-group">
+        <label for="validate-text">{{'contact.form.lastname'|trans }}</label>
+        <div class="input-group">
+        {{ form_widget(form.lastname, {'attr':{'class': 'form-control', 'name': 'validate-text', 'id': 'validate-text', 'placeholder': 'contact.p.lastname'|trans }} ) }}
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+        </div>
+        <b class="text-danger help-block">{{ form_errors(form.lastname) }}</b>
+        </div>
+         <div class="form-group">
+        <label for="validate-email">{{'contact.form.email'|trans }}</label>
+        <div class="input-group" data-validate="email">
+        {{ form_widget(form.email, {'attr':{'class': 'form-control', 'name': 'validate-email', 'id': 'validate-email', 'placeholder': 'contact.p.email'|trans }} ) }}
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+        </div>
+        <b class="text-danger help-block">{{ form_errors(form.email) }}</b>
+        </div>
+
+
+
+        <div class="form-group">
+        <label for="validate-select">{{'contact.form.object'|trans }}</label>
+        <div class="input-group">
+        {{ form_widget(form.object, {'attr':{'class': 'form-control', 'name': 'validate-select', 'id': 'validate-select' }} ) }}
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+        </div>
+        <b class="text-danger help-block pull-left">{{ form_errors(form.object) }}</b>
+        </div>
+         <div class="form-group">
+        <label for="validate-length">{{'contact.form.message'|trans }}</label>
+        <div class="input-group" data-validate="length" data-length="5">
+        {{ form_widget(form.message, {'attr':{'class': 'form-control counted v', 'rows': '5', 'maxlenght': '500', 'name': 'validate-lenght', 'id': 'validate-length', 'placeholder': 'contact.p.message'|trans }} ) }}
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+        </div>
+        {% if form_errors(form.message) %}
+        <span class="help-block pull-right" id="counter"> </span> <b class="text-danger help-block pull-left">{{ form_errors(form.message) }}</b>
+        {% else %}
+        <span class="help-block pull-left" id="counter"> </span>
+        {% endif %}
+        </div>
+
+        <div class="">
+        <br /><br /><br />
+        <button class="mb30 pull-left btn btn-danger btn-lg" type="reset" value="Reset">{{'contact.form.reset'|trans }}</button>
+        <button class="mb30 pull-right btn btn-primary btn-lg" type="submit" disabled>{{'contact.form.send'|trans }}</button>
+        </div>
+
+        </form>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <br /><br /><br /><br />
+        {% for flash_message in app.session.flashbag.get('sent') %}
+        Envoie : <b>{{ flash_message }}</b> <span class="text-success icon-lg glyphicon glyphicon-ok"></span><br />
+        {% else %}
+        Envoie :<br/>
+        {% endfor %}
+        <br />
+        <p>Données :</p>
+        prenom : <b>{{ firstname }}</b><br />
+        nom : <b>{{ lastname }}</b><br />
+        email : <b>{{ email }}</b><br />
+        objet : <b>{{ object }}</b> <br />
+        message : <b>{{ message }}</b> <br />
+        </div>
+</div> <!-- /container -->
+
+
+{% include '::footer.html.twig' %}
+{% endblock %}
+
+{% block javascript %}
+{% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
+'@MainBundle/Resources/public/js/bootstrap.min.js'
+'@MainBundle/Resources/public/js/main.js'
+'@MainBundle/Resources/public/js/form.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
