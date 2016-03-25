@@ -1,5 +1,5 @@
 {% for flash_message in app.session.flashbag.get('success') %}
-<div class="mt30 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="rows text-center">
 <div class="h alert alert-success alert-dismissible">
 <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
@@ -11,7 +11,7 @@
 {% endfor %}
 
 {% for flash_message in app.session.flashbag.get('error') %}
-<div class="mt30 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="rows text-center">
 <div class="h alert alert-danger alert-dismissible">
 <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
