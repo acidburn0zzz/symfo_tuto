@@ -4,6 +4,8 @@ namespace MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -18,7 +20,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Choice;
-
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class DefaultController extends Controller
@@ -30,7 +32,7 @@ class DefaultController extends Controller
 
 
 
-    public function contactAction(Request $request)
+     public function contactAction(Request $request)
     {
 
 	$firstname = $lastname = $email = $object = $message =  NULL;
@@ -55,17 +57,20 @@ class DefaultController extends Controller
                                                                                           //'maxMessage' => 'contact.error.lastnamemax' 
 )))))
 
-        ->add('email', EmailType::class, array('constraints' => array(new NotBlank(array(//'message' => 'contact.error.lastname'
-))
-									,new Assert\Email(array(//'message' => 'contact.error.email',
-            											'checkMX' => true
-)))))
+
+        ->add('email', TextType::class,  array('constraints' => array(new Assert\Email(array('checkMX' => true)),
+	   							      new NotBlank(),)))
+
+//        ->add('email', EmailType::class, array('constraints' => array(new Assert\Email(array(//'message' => 'contact.error.email',
+  //          											'checkMX' => true)))))
 /*
 	->add('object', ChoiceType::class, array('choices' => array('' => '','Autre' => "Autre",'Bug' => "Bug", 'Demande' => "Demande"))
 					 , array('constraints' => array(new NotBlank(array(//'message' => 'contact.error.lastname'
 )))))
 */
-	->add('object', ChoiceType::class, array('choices' => array('' => '','Autre' => "Autre",'Bug' => "Bug", 'Demande' => "Demande")))
+	->add('object', ChoiceType::class, array('choices' => array('' => '','Autre' => "Autre",'Bug' => "Bug", 'Demande' => "Demande")),
+					   array('constraints' => array(new Length(array('min' => 3)))))
+
         ->add('message', TextareaType::class, array('constraints' => array(new NotBlank(array(//'message' => 'contact.error.messagenotblank'
 ))
 								          ,new Length(array('min' => 8,
@@ -75,52 +80,73 @@ class DefaultController extends Controller
 )))))
 
         ->add('send', SubmitType::class , array('label' => 'Envoyer'))
-	->add('send2', SubmitType::class, array('attr' => array('id'   => 'autoclosable-btn-success')))
 	->add('reset', ResetType::class , array('label' => 'Envoyer'))
         ->getForm();
 
 
 	$form->handleRequest($request);
 
-	if ($form->isValid()) {
-        $firstname = $form["firstname"]->getData();
-	$lastname = $form["lastname"]->getData();
-        $email = $form["email"]->getData();
-        $object = $form["object"]->getData();
-	$message = $form["message"]->getData();
+	if ( $form->isValid() ){
+		if ( $request->isMethod('POST') ){
 
-	if ($request->isMethod('POST')){
-	$this->addFlash(
-            'notice',
-            'Ok');
-	 $this->addFlash(
-            'sent',
-            'Ok');
-        } else {
-	$this->addFlash(
-            'notice',
-            'form can\'t be reached like this');
-	}
+		$request = Request::createFromGlobals();
 
-	}
+		$firstname = $form["firstname"]->getData();
+        	$lastname = $form["lastname"]->getData();
+        	$email = $form["email"]->getData();
+        	$object = $form["object"]->getData();
+        	$message = $form["message"]->getData();
+
+		$message = \Swift_Message::newInstance()
+
+                ->setSubject($object)
+                ->setFrom(array($email))
+                ->setTo('youremailadress@yourdomain.com')
+                ->setCharset('utf-8')
+                ->setContentType('text/html')
+                ->setBody($this->container->get('templating')->render('MainBundle:SwiftMailer:email.html.twig', array('firstname' => $firstname,
+															'lastname'  => $lastname,
+															'email'     => $email,
+															'object'    => $object,
+															'message'   => $message)));
+
+	        $this->get('mailer')->send($message);
+
+
+		$this->addFlash('success','Ok');
+		$this->addFlash('sent','Ok');
+        					} else{$this->addFlash('error','Cant be reached like this');}
+						} else if (($form->isValid() === FALSE ) && ($request->isMethod('POST'))) {
+						      $this->addFlash('error','Cant be reached like this');
+						      $this->addFlash('not_sent','Not Ok');}
 
         return $this->render('MainBundle:Default:contact.html.twig', array('form'    => $form->createView(),
-                                                                        'firstname'  => $firstname,
-									'lastname'   => $lastname,
-                                                                        'email'      => $email,
-                                                                        'object'     => $object,
-									'message'    => $message));
-    }
+                                                                          'firstname'  => $firstname,
+									  'lastname'   => $lastname,
+                                                                          'email'      => $email,
+                                                                          'object'     => $object,
+									  'message'    => $message));
+    	}
 
 
     public function testAction(Request $request)
     {
 
-	$name = $email = $objet =  NULL;
+	$name = $email = $objet = $regex = NULL;
+
+	$validator = $this->get('validator');
 
 	$form = $this->createFormBuilder()
          ->add('name')
 	 ->add('email')
+	 ->add('regex', TextType::class, array('constraints' => array(new NotBlank(array(//'message' => 'contact.error.lastname'
+))
+                                                                        ,new Length(array('min' => 3,
+                                                                                          'max' => 10,
+                                                                                          //'minMessage' => 'contact.error.lastnamemin',
+                                                                                          //'maxMessage' => 'contact.error.lastnamemax' 
+)))))
+
 	 ->add('objet', ChoiceType::class, array('choices'  => array('' => null,'Yes' => "Yes",'No' => "No", 'Why Not' => "Why Not")))
          ->add('send', SubmitType::class , array('label' => 'Ok'))
          ->getForm();
@@ -128,15 +154,25 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+
+	if ($validator->validate($regex)) {
+
         $name = $form["name"]->getData();
 	$email = $form["email"]->getData();
 	$objet = $form["objet"]->getData();
+	$regex = $form["regex"]->getData();
+
+
+	}
+
         }
 
 
         return $this->render('MainBundle:Default:test.html.twig', array('form'  => $form->createView(),
 									'name'  => $name,
 									'email' => $email,
-									'objet' => $objet));
+									'objet' => $objet,
+									'regex' => $regex));
     }
 }

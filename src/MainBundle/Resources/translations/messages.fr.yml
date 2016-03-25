@@ -10,7 +10,7 @@ navbar:
      
 head:
     title: Bienvenue sur sf_tuto
-    msg: Tutoriels videos
+    msg: Tutoriels videos, apprenez Symfony
     button: Voir
     
 breadcrumb:
@@ -40,6 +40,10 @@ contact:
        head: Le message a été envoyé
        msg: merci!
        timer: Fermeture automatique dans 
+       unity: secondes
+    error:
+       head: Erreur dans le formulaire
+       timer: Fermeture automatique dans
        unity: secondes
       
 panel:

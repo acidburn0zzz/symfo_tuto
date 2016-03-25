@@ -21,26 +21,8 @@
       </div>
 
 
-<div class="text-center mt25">
-  <ol class="breadcrumb cl">
-  <li class="active"><a href="#">{{ 'breadcrumb.home'|trans }}</a></li>
-  <li><a href="#">{{ 'breadcrumb.services'|trans }}</a></li>
-  <li><a href="#">{{ 'breadcrumb.contact'|trans }}</a></li>
-  </ol>
-</div>
 
-{% for flash_message in app.session.flashbag.get('notice') %}
-<div class="container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="rows mt10 text-center">
-<div class="h alert alert-success alert-dismissible">
-<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
-<h3>{{ 'contact.success.timer'|trans }} <b id="timer"></b> {{ 'contact.success.unity'|trans }}</h3>
-<h4><i class="fa fa-envelope"></i> {{ 'contact.success.head'|trans }} </h4>
-<p>{{ 'contact.success.msg'|trans }} </p>
-</div>
-</div>
-</div>
-{% endfor %}
+{% include '::flash_message.html.twig' %}
 
 <div class="container rows"><!-- container -->
 
@@ -81,8 +63,6 @@
         <b class="text-danger help-block">{{ form_errors(form.email) }}</b>
         </div>
 
-
-
         <div class="form-group">
         <label for="validate-select">{{'contact.form.object'|trans }}</label>
         <div class="input-group">
@@ -91,6 +71,7 @@
         </div>
         <b class="text-danger help-block pull-left">{{ form_errors(form.object) }}</b>
         </div>
+
          <div class="form-group">
         <label for="validate-length">{{'contact.form.message'|trans }}</label>
         <div class="input-group" data-validate="length" data-length="5">
