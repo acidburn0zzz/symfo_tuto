@@ -1,7 +1,7 @@
 -> Public Symfony Tutorials Repository
 
-- Youtube Channel is : https://www.youtube.com/channel/ReverseEngineeringFr
-- In few time, reverse-engineering.fr will be updated.
+- Youtube Channel is : https://www.youtube.com/c/ReverseEngineeringFr
+- In few time, reverse-engineering.fr will be updated, i'm on the 12th commit...
 
 
 ------------------------
