@@ -1,18 +1,19 @@
 base:
     title: Welcome on sf_tuto Website
-    
+
 navbar:
      home: Home
      services: Services
      contact: Contact
      language: Language
      choose: Choose language
-     
+     brand: symfo_tuto
+
 head:
     title: Welcome to sf_tuto
-    msg: Videos tutorials, learn Symfony
+    msg: Videos tutorials
     button: Check
-    
+
 breadcrumb:
      home: Home
      services: Services
@@ -38,13 +39,13 @@ contact:
        send: Send
     success:
        head: The message has been sent
-       msg: thanks! 
-       timer: Autoclosing in 
-       unity: secondes
-    error:
-       head: Error in form
+       msg: thanks!
        timer: Autoclosing in
        unity: secondes
+    error:
+       head: Form error
+       timer: Autoclosing in
+       unity: secondes       
 
 panel:
     1:
@@ -59,7 +60,7 @@ panel:
       title: title3
       list: submenu3
       details: details
-      
+
 footer:
     title1: footer1
     title2: footer2

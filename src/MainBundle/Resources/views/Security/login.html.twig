@@ -1,0 +1,84 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css'
+'@MainBundle/Resources/public/css/font-awesome.min.css'
+'@MainBundle/Resources/public/css/main.css'
+'@MainBundle/Resources/public/css/form.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+{% include '::navbar.html.twig' %}
+<div class="jumbotron">
+<div class="container">
+<h1>{{ 'login.title'|trans }}</h1>
+<p>{{ 'login.msg'|trans }}</p>
+</div>
+</div>
+
+<div class="text-center mt25">
+  <ol class="breadcrumb cl">
+  <li class="active"><a href="#">{{ 'breadcrumb.home'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.services'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.contact'|trans }}</a></li>
+  </ol>
+</div>
+
+{% include '::flash_message.html.twig' %}
+
+{% if app.user %}
+<h1 class="text-center">Welcome {{ app.user.username }}</h1>
+{% else %}
+
+<div class="container">
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+<h1 class="text-center"> <i class="fa fa-lock fa-2x"></i></h1>
+<p> <i class="fa fa-user"></i> {{ 'login.msg'|trans }} </p>
+<form action="{{ path('re_login') }}" method="post" class="form-horizontal">
+  <fieldset>
+
+    <div class="form-group">
+    <label for="username" class="control-label">{{ 'login.username'|trans }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'login.username'|trans }}" />
+    </div>
+
+
+    <div class="form-group">
+    <label for="password" class="control-label">{{ 'login.pass'|trans }}</label>
+    <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'login.pass'|trans }}" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">{{ 'login.submit'|trans }}</button>
+    </div>
+
+  </fieldset>
+</form>
+
+
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+</div>
+
+</div>
+{% endif %}
+
+{% include '::footer.html.twig' %}
+{% endblock %}
+
+
+{% block javascript %}
+{% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
+'@MainBundle/Resources/public/js/bootstrap.min.js'
+'@MainBundle/Resources/public/js/main.js'
+'@MainBundle/Resources/public/js/form.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}

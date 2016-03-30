@@ -1,22 +1,32 @@
 base:
     title: Bienvenue sur le site sf_tuto
-    
+
 navbar:
      home: Accueil
      services: Services
      contact: Contact
      language: Langue
      choose: Choix langue
-     
+     brand: symfo_tuto
+     login: login
+
 head:
     title: Bienvenue sur sf_tuto
-    msg: Tutoriels videos, apprenez Symfony
+    msg: Tutoriels videos
     button: Voir
-    
+
 breadcrumb:
      home: Accueil
      services: Services
      contact: Contact
+
+login:
+    title: Login
+    msg: nom d'utilisateurs & mot de passe
+    head: AccÃ¨s Utilisateur
+    username: Nom d'utilisateur
+    pass: Mot de passe
+    submit: Envoyer
 
 contact:
     title: Bienvenue sur notre page de contact
@@ -37,15 +47,15 @@ contact:
        reset: Effacer
        send: Envoyer
     success:
-       head: Le message a été envoyé
+       head: Le message a Ã©tÃ© envoyÃ©
        msg: merci!
-       timer: Fermeture automatique dans 
-       unity: secondes
-    error:
-       head: Erreur dans le formulaire
        timer: Fermeture automatique dans
        unity: secondes
-      
+    error:
+       head: Erreur formulaire
+       timer: Fermeture automatique dans
+       unity: secondes
+       
 panel:
     1:
       title: titre1
@@ -59,7 +69,7 @@ panel:
       title: titre3
       list: sousmenu3
       details: details
-      
+
 footer:
     title1: footer1
     title2: footer2

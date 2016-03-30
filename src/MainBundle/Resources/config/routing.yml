@@ -1,3 +1,7 @@
+re_login:
+    path:     /login
+    defaults: { _controller: MainBundle:Security:login }
+
 re_main:
     path:     /{_locale}/site
     defaults: { _controller: MainBundle:Default:index }
