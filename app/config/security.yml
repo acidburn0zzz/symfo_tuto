@@ -4,9 +4,11 @@ security:
             memory:
                 users:
                     username:
-                        password: password
+                        password: $2y$12$g/55Vl2skmbseun7L0tdOue3mkMyHDfC3Y2591xqGHbemx5TNz.7m
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
 
     firewalls:
         dev:
