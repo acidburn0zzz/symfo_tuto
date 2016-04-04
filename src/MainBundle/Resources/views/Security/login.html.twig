@@ -30,6 +30,7 @@
 
 {% if app.user %}
 <h1 class="text-center">Welcome {{ app.user.username }}</h1>
+<p class="text-center">You can logout by this link <a href="{{ path('re_logout') }}">Logout</a>
 {% else %}
 
 <div class="container">

@@ -1,3 +1,6 @@
+re_logout:
+    path:     /logout
+
 re_login:
     path:     /login
     defaults: { _controller: MainBundle:Security:login }
