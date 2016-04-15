@@ -22,9 +22,6 @@ security:
                 login_path: re_login
                 check_path: re_login
                 default_target_path: re_login
-            logout:
-                path:   /logout
-                target: re_login
 
     access_control:
             - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

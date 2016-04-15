@@ -22,13 +22,25 @@
 </div>
 {% endfor %}
 
-{% for flash_message in app.session.flashbag.get('login') %}
+{% for flash_message in (app.session.flashbag.get('login')) %}
 <div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="rows text-center">
 <div class="h alert alert-danger alert-dismissible">
 <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
 <h4>{{ 'contact.error.timer'|trans }} <b id="timer"></b> {{ 'contact.error.unity'|trans }}</h4>
 <h5><i class="fa fa-exclamation-triangle"></i> {{ 'contact.error.head'|trans }} </h5>
+</div>
+</div>
+</div>
+{% endfor %}
+
+{% for flash_message in (app.session.flashbag.get('logout')) %}
+<div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="rows text-center">
+<div class="h alert alert-success alert-dismissible">
+<button type="button" class="close" data-dismiss="alert"><i class="fa fa-times fa-2x"></i></button>
+<h4>{{ 'contact.error.timer'|trans }} <b id="timer"></b> {{ 'contact.error.unity'|trans }}</h4>
+<h5><i class="fa fa-check"></i> Vous avez été déloggué </h5>
 </div>
 </div>
 </div>

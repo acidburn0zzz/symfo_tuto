@@ -28,6 +28,10 @@ login:
     pass: Mot de passe
     submit: Envoyer
 
+logout:
+    msg: Vous avez été déloggué
+    add: Merci
+
 contact:
     title: Bienvenue sur notre page de contact
     msg: envoyez nous un email
