@@ -22,7 +22,7 @@
 </div>
 {% endfor %}
 
-{% for flash_message in (app.session.flashbag.get('login')) %}
+{% for flash_message in app.session.flashbag.get('login') %}
 <div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="rows text-center">
 <div class="h alert alert-danger alert-dismissible">
@@ -34,7 +34,7 @@
 </div>
 {% endfor %}
 
-{% for flash_message in (app.session.flashbag.get('logout')) %}
+{% for flash_message in app.session.flashbag.get('logout') %}
 <div class="mt20 container abso col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="rows text-center">
 <div class="h alert alert-success alert-dismissible">
