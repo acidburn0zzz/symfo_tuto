@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css'
+'@MainBundle/Resources/public/css/font-awesome.min.css'
+'@MainBundle/Resources/public/css/main.css'
+'@MainBundle/Resources/public/css/form.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+{% include '::navbar.html.twig' %}
+<div class="jumbotron">
+<div class="container">
+<h1>Profil {{ app.user.username }} </h1>
+<p>Role : {% for r in app.user.getRoles() %} {{ r }} {% endfor %}</p>
+</div>
+</div>
+
+<div class="text-center mt25">
+  <ol class="breadcrumb cl">
+  <li class="active"><a href="#">{{ 'breadcrumb.home'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.services'|trans }}</a></li>
+  <li><a href="#">{{ 'breadcrumb.contact'|trans }}</a></li>
+  </ol>
+</div>
+
+{% include '::flash_message.html.twig' %}
+
+
+
+<div class="container">
+<h1>Bienvenue sur le profil
+{{ app.user.username }}  {% for r in app.user.getRoles() %} {{ r }} {% endfor %}
+</h1>
+</div>
+
+
+{% include '::footer.html.twig' %}
+{% endblock %}
+
+{% block javascript %}
+{% javascripts '@MainBundle/Resources/public/js/jquery.min.js'
+'@MainBundle/Resources/public/js/bootstrap.min.js'
+'@MainBundle/Resources/public/js/main.js'
+'@MainBundle/Resources/public/js/form.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
