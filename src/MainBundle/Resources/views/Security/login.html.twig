@@ -14,7 +14,7 @@
 <div class="jumbotron">
 <div class="container">
 <h1>{{ 'login.title'|trans }}</h1>
-<p>{{ 'login.msg'|trans }}</p>
+<p>{{ 'login.loggued'|trans }}</p>
 </div>
 </div>
 
@@ -31,7 +31,11 @@
 
 {% if app.user %}
 <h1 class="text-center">Welcome {{ app.user.username }}</h1>
-<p class="text-center">You can logout by this link <a href="{{ path('re_logout') }}">Logout</a>
+<p class="text-center">
+Logout : <a href="{{ path('re_logout') }}">Logout</a><br />
+User route : <a href="{{ path('re_user') }}">ROLE_USER</a><br />
+Admin route : <a href="{{ path('re_admin') }}">ROLE_ADMIN</a><br />
+</p>
 {% else %}
 
 <div class="container">

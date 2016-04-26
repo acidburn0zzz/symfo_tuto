@@ -23,6 +23,7 @@ breadcrumb:
 login:
     title: Login
     msg: nom d'utilisateurs & mot de passe
+    loggued: Compte
     head: AccÃ¨s Utilisateur
     username: Nom d'utilisateur
     pass: Mot de passe

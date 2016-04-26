@@ -4,9 +4,42 @@ namespace MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
+
+    public function adminAction()
+    {
+
+        if (FALSE === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        return $this->redirectToRoute('re_login');
+        }
+
+//      if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+//      return $this->redirectToRoute('re_index');
+//      return new Response('', 500);
+//      }
+        else {
+        return $this->render('MainBundle:Security:user.html.twig');
+        }
+    }
+
+    public function userAction()
+    {
+
+	if (FALSE === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+	return $this->redirectToRoute('re_login');
+      	}
+
+//	if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+//	return $this->redirectToRoute('re_index');
+//	return new Response('', 500);
+//	}
+	else {
+        return $this->render('MainBundle:Security:user.html.twig');
+        }
+    }
 
 
     public function logoutAction()

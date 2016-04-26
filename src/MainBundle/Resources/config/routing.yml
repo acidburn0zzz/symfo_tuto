@@ -6,6 +6,14 @@ re_login:
     path:     /login
     defaults: { _controller: MainBundle:Security:login }
 
+re_user:
+    path:     /user
+    defaults: { _controller: MainBundle:Security:user }
+
+re_admin:
+    path:     /admin
+    defaults: { _controller: MainBundle:Security:admin }
+
 re_main:
     path:     /{_locale}/site
     defaults: { _controller: MainBundle:Default:index }
