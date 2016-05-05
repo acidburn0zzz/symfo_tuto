@@ -66,8 +66,19 @@ class SecurityController extends Controller
         }
 
 
-        return $this->render('MainBundle:Security:login.html.twig', array('last_username' => $lastUsername,
+
+	if (TRUE === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        return $this->redirectToRoute('re_user');
+        }
+
+	if (TRUE === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        return $this->redirectToRoute('re_admin');
+        } else {
+
+	return $this->render('MainBundle:Security:login.html.twig', array('last_username' => $lastUsername,
                                                                           'error'         => $error));
+        }
+
     }
 
 
