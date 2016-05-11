@@ -3,7 +3,7 @@ base:
 
 navbar:
      home: Accueil
-     services: Services
+     services: Service
      contact: Contact
      language: Langue
      choose: Choix langue
@@ -20,6 +20,9 @@ breadcrumb:
      services: Services
      contact: Contact
 
+service:
+    title: Service
+    msg:   Consultez les documents
 login:
     title: Login
     msg: nom d'utilisateurs & mot de passe

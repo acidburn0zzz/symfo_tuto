@@ -1,3 +1,11 @@
+re_download:
+    path:     /dl/{file}
+    defaults: { _controller: MainBundle:Default:sendFile }
+
+re_service:
+    path:     /service
+    defaults: { _controller: MainBundle:Default:service }
+
 re_logout:
     path:     /logout
     defaults: { _controller: MainBundle:Security:logout }

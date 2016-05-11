@@ -5,6 +5,8 @@ namespace MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,6 +27,22 @@ use Symfony\Component\Validator\Constraints\Regex;
 
 class DefaultController extends Controller
 {
+
+
+
+    public function sendFileAction($file){
+
+    $file_to_send = "Resources/public/files/Symfony_book_3.0.pdf";
+    $response = new BinaryFileResponse($file_to_send);
+    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,".$file");
+    return $response;
+    }
+
+    public function serviceAction()
+    {
+        return $this->render('MainBundle:Default:service.html.twig', array('filename' => "Symfony_book_3.0"));
+    }
+
     public function indexAction()
     {
         return $this->render('MainBundle:Default:index.html.twig');

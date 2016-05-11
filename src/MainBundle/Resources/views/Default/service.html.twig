@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+{% include '::navbar.html.twig' %}
+
+ <div class="jumbotron">
+      <div class="container">
+        <h1>{{ 'service.title'|trans }}</h1>
+        <p>{{ 'service.msg'|trans }}</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">{{ 'contact.button'|trans }}&raquo;</a></p>
+      </div>
+      </div>
+
+<div class="text-center mt25">
+<ol class="breadcrumb cl">
+<li class="active"><a href="#">{{ 'breadcrumb.home'|trans }}</a></li>
+<li><a href="#">{{ 'breadcrumb.services'|trans }}</a></li>
+<li><a href="#">{{ 'breadcrumb.contact'|trans }}</a></li>
+</ol>
+</div>
+
+
+
+<h1 class="text-center">Envoyer un fichier<br />
+<a href="{{ path('re_download', {'file' : "Symfony_book_3.0.pdf" }) }}"><i class="fa fa-download fa-3x"></i></a>	
+</h1>
+
+{% include '::footer.html.twig' %}
+{% endblock %}
+
