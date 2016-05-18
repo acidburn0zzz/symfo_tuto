@@ -21,6 +21,7 @@ use Symfony\Component\Form\SubmitButtonBuilder;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
 /**
@@ -103,29 +104,7 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
         $this->assertNoViolation();
     }
 
-    public function testValidateIfParentWithCascadeValidation()
-    {
-        $object = $this->getMock('\stdClass');
-
-        $parent = $this->getBuilder('parent', null, array('cascade_validation' => true))
-            ->setCompound(true)
-            ->setDataMapper($this->getDataMapper())
-            ->getForm();
-        $options = array('validation_groups' => array('group1', 'group2'));
-        $form = $this->getBuilder('name', '\stdClass', $options)->getForm();
-        $parent->add($form);
-
-        $form->setData($object);
-
-        $this->expectValidateAt(0, 'data', $object, 'group1');
-        $this->expectValidateAt(1, 'data', $object, 'group2');
-
-        $this->validator->validate($form, new Form());
-
-        $this->assertNoViolation();
-    }
-
-    public function testValidateIfChildWithValidConstraint()
+    public function testValidateChildIfValidConstraint()
     {
         $object = $this->getMock('\stdClass');
 
@@ -149,11 +128,11 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
         $this->assertNoViolation();
     }
 
-    public function testDontValidateIfParentWithoutCascadeValidation()
+    public function testDontValidateIfParentWithoutValidConstraint()
     {
         $object = $this->getMock('\stdClass');
 
-        $parent = $this->getBuilder('parent', null, array('cascade_validation' => false))
+        $parent = $this->getBuilder('parent', null)
             ->setCompound(true)
             ->setDataMapper($this->getDataMapper())
             ->getForm();
@@ -183,13 +162,13 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
         $this->assertNoViolation();
     }
 
-    public function testValidateConstraintsEvenIfNoCascadeValidation()
+    public function testValidateConstraintsOptionEvenIfNoValidConstraint()
     {
         $object = $this->getMock('\stdClass');
         $constraint1 = new NotNull(array('groups' => array('group1', 'group2')));
         $constraint2 = new NotBlank(array('groups' => 'group2'));
 
-        $parent = $this->getBuilder('parent', null, array('cascade_validation' => false))
+        $parent = $this->getBuilder('parent', null)
             ->setCompound(true)
             ->setDataMapper($this->getDataMapper())
             ->getForm();
@@ -623,8 +602,6 @@ class FormValidatorTest extends AbstractConstraintValidatorTest
 
         $context->expects($this->never())
             ->method('addViolation');
-        $context->expects($this->never())
-            ->method('addViolationAt');
 
         $this->validator->initialize($context);
         $this->validator->validate($form, new Form());

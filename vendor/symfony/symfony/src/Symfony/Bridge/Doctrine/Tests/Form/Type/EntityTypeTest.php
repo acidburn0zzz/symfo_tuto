@@ -274,7 +274,7 @@ class EntityTypeTest extends TypeTestCase
         $field->submit(null);
 
         $this->assertNull($field->getData());
-        $this->assertNull($field->getViewData());
+        $this->assertSame('', $field->getViewData(), 'View data is always a string');
     }
 
     public function testSubmitSingleNonExpandedNull()
@@ -800,6 +800,30 @@ class EntityTypeTest extends TypeTestCase
         $this->assertTrue($field->isSynchronized(), 'Field should be synchronized.');
         $this->assertSame($entity2, $field->getData(), 'Entity should be loaded by custom value.');
         $this->assertSame('BooGroup/Bar', $field->getViewData());
+    }
+
+    public function testChoicesForValuesOptimization()
+    {
+        $entity1 = new SingleIntIdEntity(1, 'Foo');
+        $entity2 = new SingleIntIdEntity(2, 'Bar');
+
+        $this->persist(array($entity1, $entity2));
+
+        $field = $this->factory->createNamed('name', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', null, array(
+            'em' => 'default',
+            'class' => self::SINGLE_IDENT_CLASS,
+            'choice_label' => 'name',
+        ));
+
+        $this->em->clear();
+
+        $field->submit(1);
+
+        $unitOfWorkIdentityMap = $this->em->getUnitOfWork()->getIdentityMap();
+        $managedEntitiesNames = array_map('strval', $unitOfWorkIdentityMap['Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity']);
+
+        $this->assertContains((string) $entity1, $managedEntitiesNames);
+        $this->assertNotContains((string) $entity2, $managedEntitiesNames);
     }
 
     public function testGroupByChoices()

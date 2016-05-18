@@ -1,10 +1,8 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-{% stylesheets '@MainBundle/Resources/public/css/bootstrap.min.css'
-'@MainBundle/Resources/public/css/font-awesome.min.css'
-'@MainBundle/Resources/public/css/main.css'
-'@MainBundle/Resources/public/css/form.css' filter='cssrewrite' %}
+{{ parent() }}
+{% stylesheets '@MainBundle/Resources/public/css/form.css' filter='cssrewrite' %}
 <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
 {% endblock %}

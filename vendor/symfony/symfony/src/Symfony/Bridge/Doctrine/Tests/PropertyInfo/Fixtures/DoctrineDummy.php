@@ -41,6 +41,11 @@ class DoctrineDummy
     public $bar;
 
     /**
+     * @ManyToMany(targetEntity="DoctrineRelation", indexBy="guid")
+     */
+    protected $indexedBar;
+
+    /**
      * @Column(type="guid")
      */
     protected $guid;
@@ -69,6 +74,11 @@ class DoctrineDummy
      * @Column(type="binary")
      */
     private $binary;
+
+    /**
+     * @Column(type="custom_foo")
+     */
+    private $customFoo;
 
     public $notMapped;
 }
