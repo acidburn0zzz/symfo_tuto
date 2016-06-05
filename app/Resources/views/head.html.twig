@@ -2,10 +2,49 @@
       <div class="container">
         <h1>{{ 'head.title'|trans }}</h1>
         <p>{{ 'head.msg'|trans }}</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">{{ 'head.button'|trans }}&raquo;</a></p>
-      </div>
-      </div>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">{{ 'head.button'|trans }}&raquo;</a></p><br />
 
+
+
+	<div>
+	<p class=""><h2>Installer <span class="text-danger">twig extensions</span>, les filtres 
+	<span class="text-primary">truncate</span>, 
+	<span class="text-primary">wordwrap</span> et 
+	<span class="text-primary">time_diff</span> sur Symfony 3</h1></p>
+	<div class="col-md-4">
+	<h2 class="text-primary"> truncate</h2>
+	{{ 'Tronquez-moi'|truncate(5) }} <br />
+	{{ 'Tronquez-moi'|truncate(7, true) }} <br />
+	{{ 'Tronquez-moi'|truncate(7, false, "??") }} <br />
+	</div>
+
+	<div class="col-md-4">
+	<h2 class="text-primary"> wordwrap</h2>
+	{{ 'wordwrap-wordwrap-wordwrap-'|wordwrap(9, "<br />")|raw }}<br />
+	<br />
+	{{ 'wordwrap_wordwrap_wordwrap_'|wordwrap(9, "zz\n") }}<br />
+	<br />
+	</div>
+	
+	<div class="col-md-4">
+	<h2 class="text-primary"> time_diff</h2>
+	{{ "2015-02-03 22:32:12"|time_diff }}<br />
+	{{ "2015-08-03 22:32:12"|time_diff }}<br />
+	{{ "2015-12-03 22:32:12"|time_diff }}<br />
+	{{ "2016-02-03 22:32:12"|time_diff }}<br />
+	{{ "2016-04-03 22:32:12"|time_diff }}<br />
+	{{ "2016-05-03 22:32:12"|time_diff }}<br />
+	{{ "2016-05-13 22:32:12"|time_diff }}<br />
+	{{ "22:32:12"|time_diff }}<br />
+	</div>
+	</div>
+
+
+
+
+
+      </div>
+      </div>
 
 <div class="text-center mt25">
   <ol class="breadcrumb cl">
