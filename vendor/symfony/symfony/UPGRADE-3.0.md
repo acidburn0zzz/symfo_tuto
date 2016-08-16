@@ -398,8 +398,11 @@ UPGRADE FROM 2.x to 3.0
    </service>
    ```
 
- *  The `ChoiceToBooleanArrayTransformer`, `ChoicesToBooleanArrayTransformer`,
-    `FixRadioInputListener`, and `FixCheckboxInputListener` classes were removed.
+ * The `max_length` option was removed. Use the `attr` option instead by setting it to
+   an `array` with a `maxlength` key.
+
+ * The `ChoiceToBooleanArrayTransformer`, `ChoicesToBooleanArrayTransformer`,
+   `FixRadioInputListener`, and `FixCheckboxInputListener` classes were removed.
 
  * The `choice_list` option of `ChoiceType` was removed.
 
@@ -635,6 +638,11 @@ UPGRADE FROM 2.x to 3.0
    and `yaml:lint` commands have been deprecated since Symfony 2.7 and will
    be removed in Symfony 3.0. Use the `debug:config`, `debug:container`,
    `debug:router`, `debug:translation` and `lint:yaml` commands instead.
+
+ * The base `Controller`class is now abstract.
+
+ * The visibility of all methods of the base `Controller` class has been changed from
+   `public` to `protected`.
 
  * The `getRequest` method of the base `Controller` class has been deprecated
    since Symfony 2.4 and must be therefore removed in 3.0. The only reliable
@@ -931,6 +939,30 @@ UPGRADE FROM 2.x to 3.0
  * The `getMatcherDumperInstance()` and `getGeneratorDumperInstance()` methods in the
    `Symfony\Component\Routing\Router` have been changed from `public` to `protected`.
 
+ * Use the constants defined in the UrlGeneratorInterface for the $referenceType argument of the UrlGeneratorInterface::generate method.
+
+   Before:
+
+   ```php
+   // url generated in controller
+   $this->generateUrl('blog_show', array('slug' => 'my-blog-post'), true);
+
+   // url generated in @router service
+   $router->generate('blog_show', array('slug' => 'my-blog-post'), true);
+   ```
+
+   After:
+
+   ```php
+   use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+   // url generated in controller
+   $this->generateUrl('blog_show', array('slug' => 'my-blog-post'), UrlGeneratorInterface::ABSOLUTE_URL);
+
+   // url generated in @router service
+   $router->generate('blog_show', array('slug' => 'my-blog-post'), UrlGeneratorInterface::ABSOLUTE_URL);
+   ```
+
 ### Security
 
  * The `vote()` method from the `VoterInterface` was changed to now accept arbitrary
@@ -1075,7 +1107,7 @@ UPGRADE FROM 2.x to 3.0
    }
    ```
 
- * The `AbstractVoter::isGranted()` method have been replaced by `AbstractVoter::voteOnAttribute()`.
+ * The `AbstractVoter::isGranted()` method has been replaced by `Voter::voteOnAttribute()`.
 
    Before:
 
@@ -1094,7 +1126,7 @@ UPGRADE FROM 2.x to 3.0
    After:
 
    ```php
-   class MyVoter extends AbstractVoter
+   class MyVoter extends Voter
    {
        protected function voteOnAttribute($attribute, $object, TokenInterface $token)
        {
@@ -1105,8 +1137,8 @@ UPGRADE FROM 2.x to 3.0
    }
    ```
 
- * The `supportsAttribute()` and `supportsClass()` methods of classes `AuthenticatedVoter`, `ExpressionVoter`
-   and `RoleVoter` have been removed.
+ * The `supportsAttribute()` and `supportsClass()` methods of the `AuthenticatedVoter`, `ExpressionVoter`,
+   and `RoleVoter` classes have been removed.
 
  * The `intention` option was renamed to `csrf_token_id` for all the authentication listeners.
 
@@ -1737,8 +1769,7 @@ UPGRADE FROM 2.x to 3.0
 
 ### WebProfiler
 
- * The `profiler:import` and `profiler:export` commands have been deprecated and
-   will be removed in 3.0.
+ * The `profiler:import` and `profiler:export` commands have been removed.
 
  * All the profiler storages different than `FileProfilerStorage` have been
    removed. The removed classes are:

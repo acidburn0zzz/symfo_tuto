@@ -30,10 +30,12 @@ class ProjectServiceContainer extends Container
             'bar' => 'getBarService',
             'baz' => 'getBazService',
             'configured_service' => 'getConfiguredServiceService',
+            'configured_service_simple' => 'getConfiguredServiceSimpleService',
             'decorator_service' => 'getDecoratorServiceService',
             'decorator_service_with_name' => 'getDecoratorServiceWithNameService',
             'deprecated_service' => 'getDeprecatedServiceService',
             'factory_service' => 'getFactoryServiceService',
+            'factory_service_simple' => 'getFactoryServiceSimpleService',
             'foo' => 'getFooService',
             'foo.baz' => 'getFoo_BazService',
             'foo_bar' => 'getFooBarService',
@@ -64,7 +66,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getBarService()
     {
@@ -83,7 +85,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Baz A Baz instance.
+     * @return \Baz A Baz instance
      */
     protected function getBazService()
     {
@@ -100,7 +102,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \stdClass A stdClass instance.
+     * @return \stdClass A stdClass instance
      */
     protected function getConfiguredServiceService()
     {
@@ -115,12 +117,29 @@ class ProjectServiceContainer extends Container
     }
 
     /**
+     * Gets the 'configured_service_simple' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \stdClass A stdClass instance
+     */
+    protected function getConfiguredServiceSimpleService()
+    {
+        $this->services['configured_service_simple'] = $instance = new \stdClass();
+
+        (new \ConfClass('bar'))->configureStdClass($instance);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'decorator_service' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \stdClass A stdClass instance.
+     * @return \stdClass A stdClass instance
      */
     protected function getDecoratorServiceService()
     {
@@ -133,7 +152,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \stdClass A stdClass instance.
+     * @return \stdClass A stdClass instance
      */
     protected function getDecoratorServiceWithNameService()
     {
@@ -146,7 +165,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \stdClass A stdClass instance.
+     * @return \stdClass A stdClass instance
      *
      * @deprecated The "deprecated_service" service is deprecated. You should stop using it, as it will soon be removed.
      */
@@ -163,11 +182,24 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar A Bar instance.
+     * @return \Bar A Bar instance
      */
     protected function getFactoryServiceService()
     {
         return $this->services['factory_service'] = $this->get('foo.baz')->getInstance();
+    }
+
+    /**
+     * Gets the 'factory_service_simple' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Bar A Bar instance
+     */
+    protected function getFactoryServiceSimpleService()
+    {
+        return $this->services['factory_service_simple'] = (new \SimpleFactoryClass('foo'))->getInstance();
     }
 
     /**
@@ -176,7 +208,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getFooService()
     {
@@ -200,7 +232,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \BazClass A BazClass instance.
+     * @return \BazClass A BazClass instance
      */
     protected function getFoo_BazService()
     {
@@ -214,7 +246,7 @@ class ProjectServiceContainer extends Container
     /**
      * Gets the 'foo_bar' service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getFooBarService()
     {
@@ -227,7 +259,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Foo A Foo instance.
+     * @return \Foo A Foo instance
      */
     protected function getFooWithInlineService()
     {
@@ -249,7 +281,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getMethodCall1Service()
     {
@@ -259,7 +291,7 @@ class ProjectServiceContainer extends Container
 
         $instance->setBar($this->get('foo'));
         $instance->setBar(NULL);
-        $instance->setBar(($this->get("foo")->foo() . (($this->hasparameter("foo")) ? ($this->getParameter("foo")) : ("default"))));
+        $instance->setBar(($this->get("foo")->foo() . (($this->hasParameter("foo")) ? ($this->getParameter("foo")) : ("default"))));
 
         return $instance;
     }
@@ -270,7 +302,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \FooBarBaz A FooBarBaz instance.
+     * @return \FooBarBaz A FooBarBaz instance
      */
     protected function getNewFactoryServiceService()
     {
@@ -303,7 +335,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getServiceFromStaticMethodService()
     {

@@ -36,11 +36,11 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getServiceFromAnonymousFactoryService()
     {
-        return $this->services['service_from_anonymous_factory'] = call_user_func(array(new \Bar\FooClass(), 'getInstance'));
+        return $this->services['service_from_anonymous_factory'] = (new \Bar\FooClass())->getInstance();
     }
 
     /**
@@ -49,7 +49,7 @@ class ProjectServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \Bar\FooClass A Bar\FooClass instance.
+     * @return \Bar\FooClass A Bar\FooClass instance
      */
     protected function getServiceWithMethodCallAndFactoryService()
     {

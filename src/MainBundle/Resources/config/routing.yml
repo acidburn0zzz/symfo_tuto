@@ -23,10 +23,8 @@ re_admin:
     defaults: { _controller: MainBundle:Security:admin }
 
 re_main:
-    path:     /{_locale}/site
+    path:     /site
     defaults: { _controller: MainBundle:Default:index }
-    requirements:
-        _locale: en|fr
 
 re_contact:
     path:     /{_locale}/contact

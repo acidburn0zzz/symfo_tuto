@@ -49,7 +49,7 @@ $container
     ->addMethodCall('setBar', array(new Reference('foo2', ContainerInterface::NULL_ON_INVALID_REFERENCE)))
     ->addMethodCall('setBar', array(new Reference('foo3', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)))
     ->addMethodCall('setBar', array(new Reference('foobaz', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)))
-    ->addMethodCall('setBar', array(new Expression('service("foo").foo() ~ (container.hasparameter("foo") ? parameter("foo") : "default")')))
+    ->addMethodCall('setBar', array(new Expression('service("foo").foo() ~ (container.hasParameter("foo") ? parameter("foo") : "default")')))
 ;
 $container
     ->register('foo_with_inline', 'Foo')
@@ -77,6 +77,15 @@ $container
 $container
     ->register('configured_service', 'stdClass')
     ->setConfigurator(array(new Reference('configurator_service'), 'configureStdClass'))
+;
+$container
+    ->register('configurator_service_simple', 'ConfClass')
+    ->addArgument('bar')
+    ->setPublic(false)
+;
+$container
+    ->register('configured_service_simple', 'stdClass')
+    ->setConfigurator(array(new Reference('configurator_service_simple'), 'configureStdClass'))
 ;
 $container
     ->register('decorated', 'stdClass')
@@ -110,6 +119,15 @@ $container
 $container
     ->register('service_from_static_method', 'Bar\FooClass')
     ->setFactory(array('Bar\FooClass', 'getInstance'))
+;
+$container
+    ->register('factory_simple', 'SimpleFactoryClass')
+    ->addArgument('foo')
+    ->setPublic(false)
+;
+$container
+    ->register('factory_service_simple', 'Bar')
+    ->setFactory(array(new Reference('factory_simple'), 'getInstance'))
 ;
 
 return $container;

@@ -45,7 +45,65 @@ class DefaultController extends Controller
 
     public function indexAction()
     {
-        return $this->render('MainBundle:Default:index.html.twig');
+
+	$rand1 = random_bytes(10);
+        $random = bin2hex($rand1);
+	$rand = base64_encode($rand1);
+	$randomnum1 = random_int(1, 9);
+	$randomnum2 = random_int(1, 9);
+	$randomnum3 = random_int(1, 9);
+	$randomnum4 = random_int(1, 9);
+	$randomnum5 = random_int(1, 9);
+	$randomnum6 = random_int(1, 9);
+
+	$randomf = rand(0, 1000) / 1000;
+
+	$randmt1 = mt_rand(1, 100);
+	$randmt2 = mt_rand();
+	$randlet = substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 25)), 0, 10);
+	$randate= mt_rand(1161055381,1462055981);
+	$randwords = array("sportive"=>"a","spontanée"=>"b","douce"=>"c","simple"=>"d","authentique"=>"e","éthique"=>"f","intelligente"=>"g","cultivée"=>"h",
+			   "sexy"=>"i","studieuse"=>"j","attentionnée"=>"k","énergique"=>"l");
+	$randw = (array_rand($randwords, 2));
+
+	$elle = 0;
+	$valid = 0;
+
+	$size = 0;
+	$randsize = mt_rand(50, 85) + 100;
+	$size = $randsize;
+
+	if($size >= "155" && $size <= "175"){$elle = $elle + 1;}
+
+	$c=array("Bleu"=>"a","Vert"=>"b","Marron" =>"c");
+	$randeyes = (array_rand($c,1));
+
+	if($randeyes == "Bleu" OR $randeyes == "Vert"){$elle = $elle + 1;}
+
+	$h=array("Noir"=>"a","Brune"=>"b","Chatain"=>"c","Blonde"=>"d","Rousse"=>"e");
+	$randhair = (array_rand($h, 1));
+
+	if($randhair == "Brune" OR $randhair == "Rousse" OR $randhair == "Chatain"){$elle = $elle + 1;}
+	if($randhair == "Blonde"){$elle = $elle + 2;}
+
+
+	$q=array("sportive"=>"a","spontanée"=>"b","douce"=>"c","simple"=>"d","authentique"=>"e","éthique"=>"f","intelligente"=>"g","cultivée"=>"h");
+        $randqual = (array_rand($q, 3));
+
+	if(in_array("sportive", $randqual)) {$elle = $elle + 1;}
+	if(in_array("spontanée", $randqual)) {$elle = $elle + 1;}
+
+	if($elle >= "3"){$valid = 1;}
+        return $this->render('MainBundle:Default:index.html.twig', array('randsize' => $randsize, 'elle' => $elle, 'randeyes' => $randeyes, 'randhair' => $randhair,
+									 'valid' => $valid, 'randqual' => $randqual,
+									 'random'  => $random, 'rand' => $rand, 'randomnum1' => $randomnum1,
+													        'randomnum2' => $randomnum2,
+                                                                                                                'randomnum3' => $randomnum3,
+                                                                                                                'randomnum4' => $randomnum4,
+                                                                                                                'randomnum5' => $randomnum5,
+                                                                                                                'randomnum6' => $randomnum6,
+									 'randomf' => $randomf, 'randmt1' => $randmt1, 'randmt2' => $randmt2, 'randlet' => $randlet,
+									 'randate' => $randate, 'randw' => $randw));
     }
 
 

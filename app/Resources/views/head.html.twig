@@ -2,42 +2,65 @@
       <div class="container">
         <h1>{{ 'head.title'|trans }}</h1>
         <p>{{ 'head.msg'|trans }}</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">{{ 'head.button'|trans }}&raquo;</a></p><br />
-
+        <p><a class="btn btn-primary btn-lg" target="_blank" href="https://www.youtube.com/c/ReverseEngineeringFr" role="button">{{ 'head.button'|trans }}&raquo;</a></p><br />
 
 
 	<div>
-	<p class=""><h2>Installer <span class="text-danger">twig extensions</span>, les filtres 
-	<span class="text-primary">truncate</span>, 
-	<span class="text-primary">wordwrap</span> et 
-	<span class="text-primary">time_diff</span> sur Symfony 3</h1></p>
+	<p class=""><h1><span class="text-primary">Générer</span> des <span class="text-danger">random</span> sur Symfony 3</h1></p>
+	<br />
+	<div class="col-md-3">
+	<span class="text-info">Fonctions php : </span><br />
+	rand() <br />
+	mt_rand() <br />
+	random_int() <br />
+	array_rand() <br />
+	random_bytes() <br />
+	base64_encode() <br />
+	substr() <br />
+	str_shuffle() <br />
+	str_repeat() <br />
+	</div>
 	<div class="col-md-4">
-	<h2 class="text-primary"> truncate</h2>
-	{{ 'Tronquez-moi'|truncate(5) }} <br />
-	{{ 'Tronquez-moi'|truncate(7, true) }} <br />
-	{{ 'Tronquez-moi'|truncate(7, false, "??") }} <br />
+	<span class="text-danger"> Fonctions </span> <br />
+	<span class="text-primary">bin2hex(random_bytes(10)) </span><br />
+	<span class="text-primary">base64_encode(random_bytes(10))</span><br />
+	<span class="text-primary">6(rand())</span><br />
+	<span class="text-primary">rand(0, 1000) / 1000 </span><br />
+	<span class="text-primary">mt_rand(0, 100)</span><br />
+	<span class="text-primary">mt_rand()</span><br />
+	<span class="text-primary">substr(str_shuffle(str_repeat()),0,10) </span><br />
+	<span class="text-primary">mt_rand(1161055381,1462055981) </span><br />
+	<span class="text-primary">array_rand() </span><br />
+	</div>
+	<div class="col-md-3">
+	<span class="text-success"> Résultats </span> <br />
+	{{ random }}<br />
+	{{ rand }}<br />
+	{{ randomnum1 }}{{ randomnum2 }}{{ randomnum3 }}{{ randomnum4 }}{{ randomnum5 }}{{ randomnum6 }}<br />
+	{{ randomf }}<br />
+	{{ randmt1 }}<br />
+	{{ randmt2 }}<br />
+	{{ randlet }}<br />
+	{{ randate|date("m/d/Y H:m:s") }}<br />
+	{% for r in randw %}{{ r }} {% endfor %}
+	</div>
+	<div class="col-md-2">
+	<span class="text-warning"> Twig Filters</span> <br />
+	- <br />
+        - <br />
+        - <br />
+        - <br />
+        {{ randmt1|reverse }}<br />
+        {{ randmt2|reverse }}<br />
+        {{ randlet|upper }}<br />
+       	- <br />
+        {% for r in randw %}{{ loop.index }} {{ r }}<br /> {% endfor %}
+	</div>
 	</div>
 
-	<div class="col-md-4">
-	<h2 class="text-primary"> wordwrap</h2>
-	{{ 'wordwrap-wordwrap-wordwrap-'|wordwrap(9, "<br />")|raw }}<br />
-	<br />
-	{{ 'wordwrap_wordwrap_wordwrap_'|wordwrap(9, "zz\n") }}<br />
-	<br />
-	</div>
+
+
 	
-	<div class="col-md-4">
-	<h2 class="text-primary"> time_diff</h2>
-	{{ "2015-02-03 22:32:12"|time_diff }}<br />
-	{{ "2015-08-03 22:32:12"|time_diff }}<br />
-	{{ "2015-12-03 22:32:12"|time_diff }}<br />
-	{{ "2016-02-03 22:32:12"|time_diff }}<br />
-	{{ "2016-04-03 22:32:12"|time_diff }}<br />
-	{{ "2016-05-03 22:32:12"|time_diff }}<br />
-	{{ "2016-05-13 22:32:12"|time_diff }}<br />
-	{{ "22:32:12"|time_diff }}<br />
-	</div>
-	</div>
 
 
 

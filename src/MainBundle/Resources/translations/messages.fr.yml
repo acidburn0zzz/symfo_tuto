@@ -1,5 +1,5 @@
 base:
-    title: Bienvenue sur le site sf_tuto
+    title: Bienvenue sur le site symfo_tuto
 
 navbar:
      home: Accueil
@@ -11,7 +11,7 @@ navbar:
      login: login
 
 head:
-    title: Bienvenue sur sf_tuto
+    title: Bienvenue sur symfo_tuto
     msg: Tutoriels videos
     button: Voir
 
